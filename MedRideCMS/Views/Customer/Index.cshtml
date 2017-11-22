@@ -1,0 +1,165 @@
+﻿@model MedRideCMS.ViewModels.CustomerViewModel
+
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customer Dashboard</h2>
+
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#menu1">Lookup Customer</a></li>
+    <li><a data-toggle="tab" href="#menu2">Add New Customer</a></li>
+    <li><a data-toggle="tab" href="#menu3">View All Customers</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="menu1" class="tab-pane fade active in">
+        <h3>Find Customer</h3>
+        @using (Html.BeginForm("Search", "Customer", FormMethod.Post, new { @class = "form-horizontal text-right", autocomplete = "on" }))
+        {
+            <fieldset class="customer-form-fieldset">
+                <div class="container">
+                    <div class="row">
+                        <div class="form-group col-lg-4">
+                            @Html.LabelFor(m => m.SearchParams.FirstName, new { @class = "col-lg-4 customer-search-label" })
+                            @Html.TextBoxFor(m => m.SearchParams.FirstName, new { @class = "col-lg-8" })
+                            @Html.ValidationMessageFor(m => m.SearchParams.FirstName)
+                        </div>
+                        <div class="form-group col-lg-4">
+                            @Html.LabelFor(m => m.SearchParams.LastName, new { @class = "col-lg-4" })
+                            @Html.TextBoxFor(m => m.SearchParams.LastName, new { @class = "col-lg-8" })
+                            @Html.ValidationMessageFor(m => m.SearchParams.LastName)
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-lg-4">
+                            @Html.LabelFor(m => m.SearchParams.Address, new { @class = "col-lg-4" })
+                            @Html.TextBoxFor(m => m.SearchParams.Address, new { @class = "col-lg-8" })
+                            @Html.ValidationMessageFor(m => m.SearchParams.Address)
+                        </div>
+                        <div class="form-group col-lg-4">
+                            @Html.LabelFor(m => m.SearchParams.City, new { @class = "col-lg-4" })
+                            @Html.TextBoxFor(m => m.SearchParams.City, new { @class = "col-lg-8" })
+                            @Html.ValidationMessageFor(m => m.SearchParams.City)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-lg-4">
+                            @Html.LabelFor(m => m.SearchParams.StateId, new { @class = "col-lg-4" })
+                            <div class="col-lg-8 state-dropdown-container">
+                                @Html.DropDownListFor(m => m.SearchParams.StateId, new SelectList(Model.States, "Id", "Name"), "Select State", new { @class = "form-control temp input-sm" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.SearchParams.StateId)
+                        </div>
+                        <div class="form-group col-lg-4">
+                            @Html.LabelFor(m => m.SearchParams.Zip, new { @class = "col-lg-4" })
+                            @Html.TextBoxFor(m => m.SearchParams.Zip, new { @class = "col-lg-8" })
+                            @Html.ValidationMessageFor(m => m.SearchParams.Zip)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6"></div>
+                        <div class="col-lg-2">
+                            @Html.AntiForgeryToken()
+                            <div class="col-md-3"></div>
+                            <button class="btn btn-primary col-md-6">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+    <div id="menu2" class="tab-pane fade">
+        <h3>Add New Customer</h3>
+        @using (Html.BeginForm("Save", "Customer", FormMethod.Post, new { @class = "form-horizontal text-right", autocomplete = "on" }))
+        {
+
+            <fieldset class="customer-form-fieldset">
+                <div class="container">
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(m => m.Customer.FirstName, new { @class = "col-lg-4" })
+                            @Html.TextBoxFor(m => m.Customer.FirstName, new { @class = "col-lg-8" })
+                            @Html.ValidationMessageFor(m => m.Customer.FirstName)
+                        </div>
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(m => m.Customer.LastName, new { @class = "col-lg-4" })
+                            @Html.TextBoxFor(m => m.Customer.LastName, new { @class = "col-lg-8" })
+                            @Html.ValidationMessageFor(m => m.Customer.LastName)
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(m => m.Customer.Address, new { @class = "col-lg-4" })
+                            @Html.TextBoxFor(m => m.Customer.Address, new { @class = "col-lg-8" })
+                            @Html.ValidationMessageFor(m => m.Customer.Address)
+                        </div>
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(m => m.Customer.City, new { @class = "col-lg-4" })
+                            @Html.TextBoxFor(m => m.Customer.City, new { @class = "col-lg-8" })
+                            @Html.ValidationMessageFor(m => m.Customer.City)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(m => m.Customer.StateId, new { @class = "col-lg-4" })
+                            <div class="col-lg-8 state-dropdown-container">
+                                @Html.DropDownListFor(m => m.Customer.StateId, new SelectList(Model.States, "Id", "Name"), "Select State", new { @class = "form-control temp input-sm" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Customer.StateId)
+                        </div>
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(m => m.Customer.Zip, new { @class = "col-lg-4" })
+                            @Html.TextBoxFor(m => m.Customer.Zip, new { @class = "col-lg-8" })
+                            @Html.ValidationMessageFor(m => m.Customer.Zip)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(m => m.Customer.Phone, new { @class = "col-lg-4" })
+                            @Html.TextBoxFor(m => m.Customer.Phone, new { @class = "col-lg-8" })
+                            @Html.ValidationMessageFor(m => m.Customer.Phone)
+                        </div>
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(m => m.Customer.SecondaryPhone, new { @class = "col-lg-4" })
+                            @Html.TextBoxFor(m => m.Customer.SecondaryPhone, new { @class = "col-lg-8" })
+                            @Html.ValidationMessageFor(m => m.Customer.SecondaryPhone)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(m => m.Customer.Email, new { @class = "col-lg-4" })
+                            @Html.TextBoxFor(m => m.Customer.Email, new { @class = "col-lg-8" })
+                            @Html.ValidationMessageFor(m => m.Customer.Email)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-9"></div>
+                        <div class="col-lg-2">
+                            <div class="col-md-3"></div>
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(m => m.Customer.Id)
+                            @{ Model.Customer.Id = 0; }
+                            <button class="btn btn-primary col-md-6">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+    <div id="menu3" class="tab-pane fade">
+        <h3>Menu 3</h3>
+        <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
+</div>
+
+

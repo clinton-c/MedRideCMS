@@ -1,0 +1,87 @@
+﻿@model MedRideCMS.ViewModels.SaveCustomerFailedViewModel
+
+@{
+    ViewBag.Title = "SaveCustomerFailed";
+}
+
+<h2>Failed to Save Customer</h2>
+
+
+<div class="alert alert-danger" role="alert">@Model.Message</div>
+
+<h4>@Model.ErrorMessage</h4>
+
+
+
+
+<div class="container well well-lg">
+    <div class="row">
+        <div class="col-lg-2">
+            <h4>First Name</h4>
+        </div>
+        <div class="col-lg-3">
+            <h4><strong>@Model.Customer.FirstName</strong></h4>
+        </div>
+        <div class="col-lg-2">
+            <h4>Primary Phone</h4>
+        </div>
+        <div class="col-lg-3">
+            <h4><strong>@Model.Customer.Phone</strong></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            <h4>Last Name</h4>
+        </div>
+        <div class="col-lg-3">
+            <h4><strong>@Model.Customer.LastName</strong></h4>
+        </div>
+        <div class="col-lg-2">
+            <h4>Secondary Phone</h4>
+        </div>
+        <div class="col-lg-3">
+            <h4><strong>@Model.Customer.SecondaryPhone</strong></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            <h4>Address</h4>
+        </div>
+        <div class="col-lg-3">
+            <h4><strong>@Model.Customer.Address</strong></h4>
+        </div>
+        <div class="col-lg-2">
+            <h4>City</h4>
+        </div>
+        <div class="col-lg-3">
+            <h4><strong>@Model.Customer.City</strong></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            <h4>State</h4>
+        </div>
+        <div class="col-lg-3">
+            <h4><strong>@Model.State.Name</strong></h4>
+        </div>
+        <div class="col-lg-2">
+            <h4>Zip</h4>
+        </div>
+        <div class="col-lg-3">
+            <h4><strong>@Model.Customer.Zip</strong></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            <h4>Email</h4>
+        </div>
+        <div class="col-lg-3">
+            <h4><strong>@Model.Customer.Email</strong></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-1">
+            @Html.ActionLink("Done", "Index", "Customer", null, new { @class = "btn btn-primary btn-block" })
+        </div>
+    </div>
+</div>

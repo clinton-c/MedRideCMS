@@ -1,0 +1,102 @@
+﻿@model MedRideCMS.ViewModels.CustomerDetailViewModel
+@{
+    ViewBag.Title = "CustomerDetails";
+}
+
+<h2>Customer Details</h2>
+
+
+@{
+    if (!string.IsNullOrWhiteSpace(Model.Message))
+    {
+        <div class="alert alert-success" role="alert">@Model.Message</div>
+    }
+
+}
+
+
+<div class="container well well-lg">
+    <div class="row">
+        <div class="col-lg-2">
+            <h4>First Name</h4>
+        </div>
+        <div class="col-lg-3">
+            <h4><strong>@Model.Customer.FirstName</strong></h4>
+        </div>
+        <div class="col-lg-2">
+            <h4>Primary Phone</h4>
+        </div>
+        <div class="col-lg-3">
+            <h4><strong>@Model.Customer.Phone</strong></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            <h4>Last Name</h4>
+        </div>
+        <div class="col-lg-3">
+            <h4><strong>@Model.Customer.LastName</strong></h4>
+        </div>
+        <div class="col-lg-2">
+            <h4>Secondary Phone</h4>
+        </div>
+        <div class="col-lg-3">
+            <h4><strong>@Model.Customer.SecondaryPhone</strong></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            <h4>Address</h4>
+        </div>
+        <div class="col-lg-3">
+            <h4><strong>@Model.Customer.Address</strong></h4>
+        </div>
+        <div class="col-lg-2">
+            <h4>City</h4>
+        </div>
+        <div class="col-lg-3">
+            <h4><strong>@Model.Customer.City</strong></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            <h4>State</h4>
+        </div>
+        <div class="col-lg-3">
+            <h4><strong>@Model.State.Name</strong></h4>
+        </div>
+        <div class="col-lg-2">
+            <h4>Zip</h4>
+        </div>
+        <div class="col-lg-3">
+            <h4><strong>@Model.Customer.Zip</strong></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            <h4>Email</h4>
+        </div>
+        <div class="col-lg-3">
+            <h4><strong>@Model.Customer.Email</strong></h4>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-lg-5">
+        <div class="btn-group btn-group-justified">
+            @if (!string.IsNullOrWhiteSpace(Model.ReturnUrl))
+            {
+                <a class="btn btn-primary" href="@Model.ReturnUrl">Back to Results</a>
+            }
+            else
+            {
+                @Html.ActionLink("Done", "Index", "Customer", null, new { @class = "btn btn-primary" });
+            }
+
+            @Html.ActionLink("Edit", "EditCustomer", new { id = Model.Customer.Id, returnUrl = Model.ReturnUrl }, new { @class = "btn btn-primary" })
+
+            @Html.ActionLink("New Appointment", "EditCustomer", new { id = Model.Customer.Id }, new { @class = "btn btn-warning" })
+        </div>
+    </div>
+</div>
