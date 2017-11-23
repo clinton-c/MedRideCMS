@@ -17,39 +17,9 @@ namespace MedRideCMS.Controllers
         private static List<Customer> _customers = LoadCustomers();
         private static List<State> _states = LoadStates();
 
-        public ActionResult Index(string searchString, int page = 0, int pageSize = 10)
+        public ActionResult Index()
         {
-            // If searchString is empty, we don't want to pass in a viewModel
-            if (string.IsNullOrWhiteSpace(searchString))
-            {
-                return View();
-            }
-
-            // Split 'searchString' into individual words and look for any matches
-            var results = new List<Customer>();
-            var searchWords = searchString.Split(' ', ',');
-            foreach(var word in searchWords)
-            {
-                results.AddRange(_customers.Where(c => c.ToString().Contains(word)));   
-            }
-
-            // Initialize our viewModel
-            var viewModel = new CustomerViewModel();
-            viewModel.Customers = results;
-            viewModel.SearchString = searchString;
-            viewModel.States = _states;
-            viewModel.PageHandler = new PageHandler<Customer>(page, pageSize, viewModel.Customers);
-
-            // Set a ReturnUrl to use if we navigate away from this page
-            viewModel.ReturnUrl = Request.Url.ToString();
-            if (string.IsNullOrWhiteSpace(Request.Url.Query))
-            {
-                viewModel.ReturnUrl += "?searchString=" + searchString
-                + "&page=" + page
-                + "&pageSize=" + pageSize;
-            }
-
-            return View(viewModel);
+            return View();
         }
 
         public ActionResult CustomerLookup()

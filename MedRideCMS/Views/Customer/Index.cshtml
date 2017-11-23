@@ -1,5 +1,4 @@
-﻿@model MedRideCMS.ViewModels.CustomerViewModel
-
+﻿
 @{
     ViewBag.Title = "Customers";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -28,89 +27,9 @@
 
                 <div class="panel-heading">
 
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2">
-
-                            @using (Html.BeginForm("Index", "Customer", FormMethod.Post))
-                            {
-                                <div class="input-group input-group">
-
-                                    @Html.TextBoxFor(m => m.SearchString, new { @class="form-control", placeholder="Search for..."})
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default">Go!</button>
-                                    </span>
-                                </div>
-                            }
-                                
-
-                        </div>
-                    </div>
-
-
                 </div>
                 <div class="panel-body">
-                    @if (Model != null)
-                    {
-
-                        var pageHandler = Model.PageHandler;
-                        var pageNavList = pageHandler.GetPageNavigationList(5);
-
-                        var basicRouteValues = new RouteValueDictionary();
-                        basicRouteValues.Add("SearchString", Model.SearchString);
-                        basicRouteValues.Add("PageSize", Model.PageHandler.PageSize);
-
-
-                        <h4>
-                            Found @Model.Customers.Count matches for: <em>"@(Model.SearchString)"</em>
-                        </h4>
-
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>
-
-                                            @Html.ActionLink("First Name", "Index", "Customer", new RouteValueDictionary(basicRouteValues) { { "Page", pageHandler.Page } }, null)
-                                        </th>
-                                        <th>
-                                            @Html.ActionLink("Last Name", "Index", "Customer", new RouteValueDictionary(basicRouteValues) { { "Page", pageHandler.Page } }, null)
-                                        </th>
-
-                                        <th>Address</th>
-                                        <th>City</th>
-                                        <th>
-                                            @Html.ActionLink("State", "Search", "Customer", new RouteValueDictionary(basicRouteValues) { { "Page", pageHandler.Page } }, null)
-                                        </th>
-
-                                        <th>Zip</th>
-                                        <th>Phone</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-
-                                @foreach (var customer in Model.Customers)
-                                {
-                                    <tr>
-                                        <td>@customer.FirstName</td>
-                                        <td>@customer.LastName</td>
-                                        <td>@customer.Address</td>
-                                        <td>@customer.City</td>
-                                        <td>@Model.States.SingleOrDefault(s => s.Id == customer.StateId).AbbreviatedName</td>
-                                        <td>@customer.Zip</td>
-                                        <td>@customer.Phone</td>
-                                        <td>
-                                            @Html.ActionLink("Details", "CustomerDetails", new { id = customer.Id, returnUrl = Model.ReturnUrl })
-                                            <span>|</span>
-                                            @Html.ActionLink("Edit", "EditCustomer", new { id = customer.Id, returnUrl = Model.ReturnUrl })
-                                            <span>|</span>
-                                            @Html.ActionLink("New Appointment", "EditCustomer", new { id = customer.Id })
-                                        </td>
-                                    </tr>
-                                }
-
-                            </table>
-                        </div>
-                    }
+                    
                 </div>
             </div>
         </div>
