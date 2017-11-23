@@ -217,9 +217,11 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CustomerDeletedViewModel.cs" />
     <Compile Include="ViewModels\CustomerDetailViewModel.cs" />
+    <Compile Include="ViewModels\CustomerLookupViewModel.cs" />
     <Compile Include="ViewModels\CustomerSearchResultViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\EditCustomerViewModel.cs" />
+    <Compile Include="ViewModels\NewCustomerViewModel.cs" />
     <Compile Include="ViewModels\PageHandler.cs" />
     <Compile Include="ViewModels\SaveCustomerFailedViewModel.cs" />
   </ItemGroup>
@@ -287,6 +289,8 @@
     <Content Include="Views\Customer\EditCustomer.cshtml" />
     <Content Include="Views\Customer\SaveCustomerFailed.cshtml" />
     <Content Include="Views\Customer\CustomerDeleted.cshtml" />
+    <Content Include="Views\Customer\CustomerLookup.cshtml" />
+    <Content Include="Views\Customer\NewCustomer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

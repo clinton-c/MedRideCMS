@@ -9,10 +9,15 @@ namespace MedRideCMS.ViewModels
 {
     public class CustomerViewModel
     {
-        public CustomerSearchParamsDto SearchParams { get; set; }
+        public string SearchString { get; set; }
 
-        public Customer Customer { get; set; }
-        
         public List<State> States { get; set; }
+
+        public List<Customer> Customers { get; set; }
+
+        public PageHandler<Customer> PageHandler { get; set; }
+
+        public string ReturnUrl { get; set; }
+
     }
 }

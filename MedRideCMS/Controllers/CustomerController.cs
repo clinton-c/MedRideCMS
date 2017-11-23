@@ -17,14 +17,61 @@ namespace MedRideCMS.Controllers
         private static List<Customer> _customers = LoadCustomers();
         private static List<State> _states = LoadStates();
 
-        // GET: Customer
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int page = 0, int pageSize = 10)
         {
-            var viewModel = new CustomerViewModel { SearchParams = new CustomerSearchParamsDto(),
-                                                    Customer = new Customer(),
-                                                    States = LoadStates() };
+            // If searchString is empty, we don't want to pass in a viewModel
+            if (string.IsNullOrWhiteSpace(searchString))
+            {
+                return View();
+            }
+
+            // Split 'searchString' into individual words and look for any matches
+            var results = new List<Customer>();
+            var searchWords = searchString.Split(' ', ',');
+            foreach(var word in searchWords)
+            {
+                results.AddRange(_customers.Where(c => c.ToString().Contains(word)));   
+            }
+
+            // Initialize our viewModel
+            var viewModel = new CustomerViewModel();
+            viewModel.Customers = results;
+            viewModel.SearchString = searchString;
+            viewModel.States = _states;
+            viewModel.PageHandler = new PageHandler<Customer>(page, pageSize, viewModel.Customers);
+
+            // Set a ReturnUrl to use if we navigate away from this page
+            viewModel.ReturnUrl = Request.Url.ToString();
+            if (string.IsNullOrWhiteSpace(Request.Url.Query))
+            {
+                viewModel.ReturnUrl += "?searchString=" + searchString
+                + "&page=" + page
+                + "&pageSize=" + pageSize;
+            }
+
+            return View(viewModel);
+        }
+
+        public ActionResult CustomerLookup()
+        {
+            var viewModel = new CustomerLookupViewModel
+            {
+                SearchParams = new CustomerSearchParamsDto(),
+                States = _states
+            };
 
             ModelState.Clear();
+
+            return View(viewModel);
+        }
+
+        public ActionResult NewCustomer()
+        {
+            var viewModel = new NewCustomerViewModel
+            {
+                Customer = new Customer(),
+                States = _states
+            };
 
             return View(viewModel);
         }
