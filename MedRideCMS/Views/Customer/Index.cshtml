@@ -16,7 +16,7 @@
 <div class="tab-content">
     <div id="menu1" class="tab-pane fade active in">
         <h3>Find Customer</h3>
-        @using (Html.BeginForm("Search", "Customer", FormMethod.Post, new { @class = "form-horizontal text-right", autocomplete = "on" }))
+        @using (Html.BeginForm("CustomerLookupResult", "Customer", FormMethod.Post, new { @class = "form-horizontal text-right", autocomplete = "on" }))
         {
             <fieldset class="customer-form-fieldset">
                 <div class="container">

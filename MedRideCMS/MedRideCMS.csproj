@@ -210,6 +210,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\CustomerSortType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\State.cs" />
@@ -217,7 +218,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CustomerDeletedViewModel.cs" />
     <Compile Include="ViewModels\CustomerDetailViewModel.cs" />
-    <Compile Include="ViewModels\CustomerSearchResultViewModel.cs" />
+    <Compile Include="ViewModels\CustomerLookupResultViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\EditCustomerViewModel.cs" />
     <Compile Include="ViewModels\PageHandler.cs" />
@@ -282,7 +283,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
-    <Content Include="Views\Customer\SearchResult.cshtml" />
+    <Content Include="Views\Customer\CustomerLookupResult.cshtml" />
     <Content Include="Views\Customer\CustomerDetails.cshtml" />
     <Content Include="Views\Customer\EditCustomer.cshtml" />
     <Content Include="Views\Customer\SaveCustomerFailed.cshtml" />

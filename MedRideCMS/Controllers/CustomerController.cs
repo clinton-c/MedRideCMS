@@ -29,7 +29,7 @@ namespace MedRideCMS.Controllers
             return View(viewModel);
         }
 
-        public ActionResult Search(CustomerSearchParamsDto searchParams, string sortBy, int page = 0, int pageSize = 10)
+        public ActionResult CustomerLookupResult(CustomerSearchParamsDto searchParams, int sortBy = 0, int page = 0, int pageSize = 10)
         {
             IEnumerable<Customer> results = _customers.Where((Customer c) => (EqualsIgnoreCase(c.FirstName, searchParams.FirstName) && EqualsIgnoreCase(c.LastName, searchParams.LastName)) 
                 || (EqualsIgnoreCase(c.Address, searchParams.Address)
@@ -38,32 +38,9 @@ namespace MedRideCMS.Controllers
                 && EqualsIgnoreCase(c.Zip, searchParams.Zip))
             );
 
-            switch (sortBy)
-            {
-                case CustomerSearchResultViewModel.FirstName_Ascending:
-                    results = results.OrderBy(c => c.FirstName);
-                    break;
-                case CustomerSearchResultViewModel.FirstName_Descending:
-                    results = results.OrderByDescending(c => c.FirstName);
-                    break;
-                case CustomerSearchResultViewModel.LastName_Ascending:
-                    results = results.OrderBy(c => c.LastName);
-                    break;
-                case CustomerSearchResultViewModel.LastName_Descending:
-                    results = results.OrderByDescending(c => c.LastName);
-                    break;
-                case CustomerSearchResultViewModel.State_Ascending:
-                    results = results.OrderBy(c => _states.SingleOrDefault(s => s.Id == c.StateId).Name);
-                    break;
-                case CustomerSearchResultViewModel.State_Descending:
-                    results = results.OrderByDescending(c => _states.SingleOrDefault(s => s.Id == c.StateId).Name);
-                    break;
-                default:
-                    results = results.OrderBy(c => c.LastName);
-                    break;
-            }
+            results = SortCustomersBy(results, sortBy);
 
-            var viewModel = new CustomerSearchResultViewModel();
+            var viewModel = new CustomerLookupResultViewModel();
             viewModel.PageHandler = new PageHandler<Customer>(page, pageSize, results);
             viewModel.Customers = viewModel.PageHandler.GetCurrentPageItems().ToList();
             searchParams.StateName = searchParams.StateId.HasValue ? _states.SingleOrDefault(s => s.Id == searchParams.StateId).Name : string.Empty;
@@ -71,7 +48,6 @@ namespace MedRideCMS.Controllers
             viewModel.SortByType = sortBy;
             viewModel.States = _states.ToList();
             viewModel.ReturnUrl = Request.Url.ToString();
-
 
             if(string.IsNullOrWhiteSpace(Request.Url.Query))
             {
@@ -87,7 +63,7 @@ namespace MedRideCMS.Controllers
             }
                 
 
-            return View("SearchResult", viewModel);
+            return View("CustomerLookupResult", viewModel);
         }
 
         public ActionResult Save(Customer customer, string returnUrl)
@@ -402,5 +378,33 @@ namespace MedRideCMS.Controllers
             return string.Equals(str1, str2, StringComparison.InvariantCultureIgnoreCase);
         }
 
+        private IEnumerable<Customer> SortCustomersBy(IEnumerable<Customer> customers, int sortBy)
+        {
+            switch (sortBy)
+            {
+                case CustomerSortType.FirstName_Ascending:
+                    customers = customers.OrderBy(c => c.FirstName);
+                    break;
+                case CustomerSortType.FirstName_Descending:
+                    customers = customers.OrderByDescending(c => c.FirstName);
+                    break;
+                case CustomerSortType.LastName_Ascending:
+                    customers = customers.OrderBy(c => c.LastName);
+                    break;
+                case CustomerSortType.LastName_Descending:
+                    customers = customers.OrderByDescending(c => c.LastName);
+                    break;
+                case CustomerSortType.State_Ascending:
+                    customers = customers.OrderBy(c => _states.SingleOrDefault(s => s.Id == c.StateId).Name);
+                    break;
+                case CustomerSortType.State_Descending:
+                    customers = customers.OrderByDescending(c => _states.SingleOrDefault(s => s.Id == c.StateId).Name);
+                    break;
+                default:
+                    break;
+            }
+
+            return customers;
+        }
     }
 }
