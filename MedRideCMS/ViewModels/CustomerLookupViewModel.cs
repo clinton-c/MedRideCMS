@@ -7,12 +7,10 @@ using System.Web;
 
 namespace MedRideCMS.ViewModels
 {
-    public class CustomerViewModel
+    public class CustomerLookupViewModel
     {
         public CustomerSearchParamsDto SearchParams { get; set; }
 
-        public Customer Customer { get; set; }
-        
         public List<State> States { get; set; }
     }
 }

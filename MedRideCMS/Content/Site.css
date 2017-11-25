@@ -17,10 +17,17 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
+/* Actually, DON'T do this*/
+/*
 input,
 select,
 textarea {
     max-width: 280px;
+}
+*/
+
+label {
+    word-wrap: break-word;
 }
 
 div.state-dropdown-container {

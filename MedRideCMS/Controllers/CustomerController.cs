@@ -17,17 +17,35 @@ namespace MedRideCMS.Controllers
         private static List<Customer> _customers = LoadCustomers();
         private static List<State> _states = LoadStates();
 
-        // GET: Customer
         public ActionResult Index()
         {
-            var viewModel = new CustomerViewModel { SearchParams = new CustomerSearchParamsDto(),
-                                                    Customer = new Customer(),
-                                                    States = LoadStates() };
+            return View();
+        }
+
+        public ActionResult CustomerLookup()
+        {
+            var viewModel = new CustomerLookupViewModel
+            {
+                SearchParams = new CustomerSearchParamsDto(),
+                States = _states
+            };
 
             ModelState.Clear();
 
             return View(viewModel);
         }
+		
+		public ActionResult NewCustomer()
+        {
+            var viewModel = new NewCustomerViewModel
+            {
+                Customer = new Customer(),
+                States = _states
+            };
+
+            return View(viewModel);
+        }
+
 
         public ActionResult CustomerLookupResult(CustomerSearchParamsDto searchParams, int sortBy = 0, int page = 0, int pageSize = 10)
         {
