@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using MedRideCMS.ViewModels.AccountViewModels;
 using MedRideCMS.Models;
 
 namespace MedRideCMS.Controllers

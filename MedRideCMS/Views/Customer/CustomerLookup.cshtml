@@ -1,4 +1,4 @@
-﻿@model MedRideCMS.ViewModels.CustomerLookupViewModel
+﻿@model MedRideCMS.ViewModels.CustomerViewModels.CustomerLookupViewModel
 
 @{
     ViewBag.Title = "CustomerLookup";
@@ -28,7 +28,7 @@
             </ul>
         </div>
         <div class="col-lg-10">
-            @using (Html.BeginForm("Search", "Customer", FormMethod.Post, new { @class = "form-horizontal text-right", autocomplete = "on" }))
+            @using (Html.BeginForm("CustomerLookupResult", "Customer", FormMethod.Post, new { @class = "form-horizontal text-right", autocomplete = "on" }))
             {
                 <fieldset class="customer-form-fieldset">
                     <div class="container">

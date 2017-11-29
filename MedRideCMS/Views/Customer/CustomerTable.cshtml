@@ -1,0 +1,88 @@
+﻿@model MedRideCMS.ViewModels.CustomerViewModels.CustomerPagedResultViewModel
+@using MedRideCMS.Models
+
+@{ 
+    var firstNameSortToggle = base.Model.SortByType == CustomerSortType.FirstName_Ascending
+        ? CustomerSortType.FirstName_Descending
+        : (base.Model.SortByType == CustomerSortType.FirstName_Descending ? CustomerSortType.Default : CustomerSortType.FirstName_Ascending);
+
+    var lastNameSortToggle = base.Model.SortByType == CustomerSortType.LastName_Ascending
+        ? CustomerSortType.LastName_Descending
+        : (base.Model.SortByType == CustomerSortType.LastName_Descending ? CustomerSortType.Default : CustomerSortType.LastName_Ascending);
+
+    var stateSortToggle = base.Model.SortByType == CustomerSortType.State_Ascending
+        ? CustomerSortType.State_Descending
+        : (base.Model.SortByType == CustomerSortType.State_Descending ? CustomerSortType.Default : CustomerSortType.State_Ascending);
+
+
+    var returnUrl = Model.ReturnUrl.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", Model.Page }, { "SortBy", Model.SortByType }, { "PageSize", Model.PageSize } });
+
+
+}
+
+
+
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>
+                    <a href="@Url.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", Model.Page }, { "SortBy", firstNameSortToggle }, { "PageSize", Model.PageSize } })">
+                        First Name
+                        <span class="glyphicon glyphicon-arrow-down @(base.Model.SortByType== CustomerSortType.FirstName_Descending ? "" : "hidden" )" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-arrow-up @(base.Model.SortByType== CustomerSortType.FirstName_Ascending ? "" : "hidden" )" aria-hidden="true"></span>
+                    </a> 
+                </th>
+                <th>
+                    <a href="@Url.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", Model.Page }, { "SortBy", lastNameSortToggle }, { "PageSize", Model.PageSize } })">
+                        Last Name
+                        <span class="glyphicon glyphicon-arrow-down @(base.Model.SortByType== CustomerSortType.LastName_Descending ? "" : "hidden" )" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-arrow-up @(base.Model.SortByType== CustomerSortType.LastName_Ascending ? "" : "hidden" )" aria-hidden="true"></span>
+                    </a>
+                </th>
+
+                <th>Address</th>
+                <th>City</th>
+                <th>
+                    <a href="@Url.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", Model.Page }, { "SortBy", stateSortToggle }, { "PageSize", Model.PageSize } })">
+                        State
+                        <span class="glyphicon glyphicon-arrow-down @(base.Model.SortByType== CustomerSortType.State_Descending ? "" : "hidden" )" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-arrow-up @(base.Model.SortByType== CustomerSortType.State_Ascending ? "" : "hidden" )" aria-hidden="true"></span>
+                    </a>
+
+                </th>
+
+                <th>Zip</th>
+                <th>Phone</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        @foreach (var customer in Model.PageItems)
+        {
+            <tr>
+                <td>@customer.FirstName</td>
+                <td>@customer.LastName</td>
+                <td>@customer.Address</td>
+                <td>@customer.City</td>
+                <td>@Model.States.SingleOrDefault(s => s.Id == customer.StateId).AbbreviatedName</td>
+                <td>@customer.Zip</td>
+                <td>@customer.Phone</td>
+                <td>
+                    @Html.ActionLink("Details", "CustomerDetails", new { id = customer.Id, returnUrl = returnUrl })
+                    <span>|</span>
+                    @Html.ActionLink("Edit", "EditCustomer", new { id = customer.Id, returnUrl = returnUrl })
+                    <span>|</span>
+                    @Html.ActionLink("New Appointment", "EditCustomer", new { id = customer.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+
+
+
+

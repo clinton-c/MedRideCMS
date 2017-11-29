@@ -1,139 +1,24 @@
-﻿@model MedRideCMS.ViewModels.CustomerLookupResultViewModel
+﻿@model MedRideCMS.ViewModels.CustomerViewModels.CustomerLookupResultViewModel
 @using MedRideCMS.Models
 
 @{
     ViewBag.Title = "SearchResult";
-
-    var pageHandler = Model.PageHandler;
-    var pageNavList = pageHandler.GetPageNavigationList(5);
-
-    var firstNameSortToggle = Model.SortByType == CustomerSortType.FirstName_Ascending
-        ? CustomerSortType.FirstName_Descending
-        : ( Model.SortByType == CustomerSortType.FirstName_Descending ? CustomerSortType.Default : CustomerSortType.FirstName_Ascending);
-
-    var lastNameSortToggle = Model.SortByType == CustomerSortType.LastName_Ascending
-        ? CustomerSortType.LastName_Descending
-        : ( Model.SortByType == CustomerSortType.LastName_Descending ? CustomerSortType.Default : CustomerSortType.LastName_Ascending);
-
-    var stateSortToggle = Model.SortByType == CustomerSortType.State_Ascending
-        ? CustomerSortType.State_Descending
-        : ( Model.SortByType == CustomerSortType.State_Descending ? CustomerSortType.Default : CustomerSortType.State_Ascending);
-
-    var basicRouteValues = new RouteValueDictionary();
-    basicRouteValues.Add("FirstName", Model.SearchParams.FirstName);
-    basicRouteValues.Add("LastName", Model.SearchParams.LastName);
-    basicRouteValues.Add("Address", Model.SearchParams.Address);
-    basicRouteValues.Add("City", Model.SearchParams.City);
-    basicRouteValues.Add("StateId", Model.SearchParams.StateId);
-    basicRouteValues.Add("Zip", Model.SearchParams.Zip);
-    basicRouteValues.Add("PageSize", pageHandler.PageSize);
 }
 
 
 <div class="container">
 
 
-    <h2>Search Results <small>@Html.ActionLink("(Back to Search)", "Index", "Customer", null, new { @class = "btn btn-link" })</small></h2>
+    <h2>Search Results <small>@Html.ActionLink("(Back to Search)", "CustomerLookup", "Customer", null, new { @class = "btn btn-link" })</small></h2>
     <h4>
-        Found @pageHandler.TotalNumItems matches for: <em>"@(Model.SearchParams.ToString())"</em>
+        Found @Model.PagedResult.TotalNumItems matches for: <em>"@(Model.SearchParams.ToString())"</em>
     </h4>
 
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>
 
-                        @Html.ActionLink("First Name", "CustomerLookupResult", "Customer", new RouteValueDictionary(basicRouteValues) { { "SortBy", firstNameSortToggle }, { "Page", pageHandler.Page } }, null)
-                        <span class="glyphicon glyphicon-arrow-down @(Model.SortByType==CustomerSortType.FirstName_Descending ? "" : "hidden" )" aria-hidden="true"></span>
-                        <span class="glyphicon glyphicon-arrow-up @(Model.SortByType==CustomerSortType.FirstName_Ascending ? "" : "hidden" )" aria-hidden="true"></span>
-                    </th>
-                    <th>
-                        @Html.ActionLink("Last Name", "CustomerLookupResult", "Customer", new RouteValueDictionary(basicRouteValues) { { "SortBy", lastNameSortToggle }, { "Page", pageHandler.Page } }, null)
-                        <span class="glyphicon glyphicon-arrow-down @(Model.SortByType==CustomerSortType.LastName_Descending ? "" : "hidden" )" aria-hidden="true"></span>
-                        <span class="glyphicon glyphicon-arrow-up @(Model.SortByType==CustomerSortType.LastName_Ascending ? "" : "hidden" )" aria-hidden="true"></span>
-                    </th>
-
-                    <th>Address</th>
-                    <th>City</th>
-                    <th>
-                        @Html.ActionLink("State", "CustomerLookupResult", "Customer", new RouteValueDictionary(basicRouteValues) { { "SortBy", stateSortToggle }, { "Page", pageHandler.Page } }, null)
-                        <span class="glyphicon glyphicon-arrow-down @(Model.SortByType==CustomerSortType.State_Descending ? "" : "hidden" )" aria-hidden="true"></span>
-                        <span class="glyphicon glyphicon-arrow-up @(Model.SortByType==CustomerSortType.State_Ascending ? "" : "hidden" )" aria-hidden="true"></span>
-                    </th>
-
-                    <th>Zip</th>
-                    <th>Phone</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-
-            @foreach (var customer in Model.Customers)
-            {
-                <tr>
-                    <td>@customer.FirstName</td>
-                    <td>@customer.LastName</td>
-                    <td>@customer.Address</td>
-                    <td>@customer.City</td>
-                    <td>@Model.States.SingleOrDefault(s => s.Id == customer.StateId).AbbreviatedName</td>
-                    <td>@customer.Zip</td>
-                    <td>@customer.Phone</td>
-                    <td>
-                        @Html.ActionLink("Details", "CustomerDetails", new { id = customer.Id, returnUrl = Model.ReturnUrl })
-                        <span>|</span>
-                        @Html.ActionLink("Edit", "EditCustomer", new { id = customer.Id, returnUrl = Model.ReturnUrl })
-                        <span>|</span>
-                        @Html.ActionLink("New Appointment", "EditCustomer", new { id = customer.Id })
-                    </td>
-                </tr>
-            }
-
-        </table>
-    </div>
-
-    <nav aria-label="Search Result Page Navigator">
-        <h5>Showing Page @(pageHandler.Page + 1) of @pageHandler.TotalNumPages</h5>
-        <ul id="page-nav-list" class="pagination">
-            <li>
-
-                <a href="@Url.Action("CustomerLookupResult", "Customer", new RouteValueDictionary(basicRouteValues) { { "Page", pageHandler.FirstPage }, { "SortBy", Model.SortByType } })" aria-label="first-page">
-                    <span aria-hidden="@(pageHandler.IsFirstPage ? "true" : "false")">&laquo;</span>
-                </a>
-            </li>
-            <li>
-                <a href="@Url.Action("CustomerLookupResult", "Customer", new RouteValueDictionary(basicRouteValues) { { "Page", pageHandler.PreviousPage }, { "SortBy", Model.SortByType } } )" aria-label="Previous">
-                    <span aria-hidden="@(pageHandler.IsFirstPage ? "true" : "false")">&lsaquo;</span>
-                </a>
-            </li>
-
-
-            @for (var i = 0; i < pageNavList.Length; i++)
-            {
-                var isCurrPage = pageNavList[i] == pageHandler.Page ? true : false;
-
-                <li class="@(isCurrPage ? "active" : "")">
-                    <a id="@(isCurrPage ? "current-page" : "")" href="@Url.Action("CustomerLookupResult", "Customer", new RouteValueDictionary(basicRouteValues) { { "Page", pageNavList[i] }, { "SortBy", Model.SortByType } })">
-                        @(pageNavList[i] + 1)
-
-                        <span class="sr-only">@(isCurrPage ? "(current)" : "")</span>
-                    </a>
-                </li>
-            }
-
-
-            <li>
-                <a href="@Url.Action("CustomerLookupResult", "Customer", new RouteValueDictionary(basicRouteValues) { { "Page", pageHandler.Page < pageHandler.TotalNumPages - 1 ? pageHandler.Page + 1 : pageHandler.Page }, { "SortBy", Model.SortByType } })" aria-label="Next">
-                    <span aria-hidden="@(Model.Customers.Count <= pageHandler.PageSize || pageHandler.Page == pageHandler.TotalNumPages ? "true" : "false")">&rsaquo;</span>
-                </a>
-            </li>
-            <li>
-                <a href="@Url.Action("CustomerLookupResult", "Customer", new RouteValueDictionary(basicRouteValues) { { "Page", pageHandler.TotalNumPages - 1 }, { "SortBy", Model.SortByType } })" aria-label="last-page">
-                    <span aria-hidden="@(Model.Customers.Count <= pageHandler.PageSize || pageHandler.Page == pageHandler.TotalNumPages ? "true" : "false")">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-
-    </nav>
+    @{ Html.RenderPartial("CustomerTable", Model.PagedResult); }
+    
+    @{ Html.RenderPartial("PagedResultNavigationButtons", Model.PagedResult); }
+   
 </div>
 
 

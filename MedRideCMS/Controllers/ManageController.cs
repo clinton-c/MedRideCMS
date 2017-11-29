@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using MedRideCMS.Models;
+using MedRideCMS.ViewModels.ManageViewModels;
 
 namespace MedRideCMS.Controllers
 {
