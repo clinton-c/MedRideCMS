@@ -7,6 +7,11 @@ namespace MedRideCMS.ViewModels.CustomerViewModels
 {
     public class IndexViewModel
     {
-        public CustomerPagedResultViewModel PagedResult { get; set; }
+        public CustomerTableViewModel TableViewModel { get; set; }
+
+        // These properties are only used when submitting form data
+        public int SortBy { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
     }
 }

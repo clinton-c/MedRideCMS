@@ -208,6 +208,52 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712052211472_Initial Migration.cs" />
+    <Compile Include="Migrations\201712052211472_Initial Migration.Designer.cs">
+      <DependentUpon>201712052211472_Initial Migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712052224378_Adding Customer and State objects..cs" />
+    <Compile Include="Migrations\201712052224378_Adding Customer and State objects..Designer.cs">
+      <DependentUpon>201712052224378_Adding Customer and State objects..cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712052253344_Added validation attributes to customer.cs" />
+    <Compile Include="Migrations\201712052253344_Added validation attributes to customer.Designer.cs">
+      <DependentUpon>201712052253344_Added validation attributes to customer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712052259487_More validation for customer.cs" />
+    <Compile Include="Migrations\201712052259487_More validation for customer.Designer.cs">
+      <DependentUpon>201712052259487_More validation for customer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712060028330_Seed States Table.cs" />
+    <Compile Include="Migrations\201712060028330_Seed States Table.Designer.cs">
+      <DependentUpon>201712060028330_Seed States Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712061921052_Seed more states.cs" />
+    <Compile Include="Migrations\201712061921052_Seed more states.Designer.cs">
+      <DependentUpon>201712061921052_Seed more states.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712072121397_Fix the abbreviated names of Minnesota, Mississippi, Missouri, Montana.cs" />
+    <Compile Include="Migrations\201712072121397_Fix the abbreviated names of Minnesota, Mississippi, Missouri, Montana.Designer.cs">
+      <DependentUpon>201712072121397_Fix the abbreviated names of Minnesota, Mississippi, Missouri, Montana.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712072139095_Fix issue of having multiple states with abbreviated name AK.cs" />
+    <Compile Include="Migrations\201712072139095_Fix issue of having multiple states with abbreviated name AK.Designer.cs">
+      <DependentUpon>201712072139095_Fix issue of having multiple states with abbreviated name AK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712072145105_Added District of Columbia.cs" />
+    <Compile Include="Migrations\201712072145105_Added District of Columbia.Designer.cs">
+      <DependentUpon>201712072145105_Added District of Columbia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712072155157_Removed range requirment for stateId.cs" />
+    <Compile Include="Migrations\201712072155157_Removed range requirment for stateId.Designer.cs">
+      <DependentUpon>201712072155157_Removed range requirment for stateId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712121918443_Update validation for customer.cs" />
+    <Compile Include="Migrations\201712121918443_Update validation for customer.Designer.cs">
+      <DependentUpon>201712121918443_Update validation for customer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Appointment.cs" />
     <Compile Include="ViewModels\AccountViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerSortType.cs" />
@@ -220,11 +266,11 @@
     <Compile Include="ViewModels\CustomerViewModels\CustomerDetailViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModels\CustomerLookupResultViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModels\CustomerLookupViewModel.cs" />
-    <Compile Include="ViewModels\CustomerViewModels\CustomerPagedResultViewModel.cs" />
+    <Compile Include="ViewModels\CustomerViewModels\CustomerTableViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModels\EditCustomerViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModels\IndexViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModels\NewCustomerViewModel.cs" />
-    <Compile Include="ViewModels\SharedViewModels\PagedResultViewModel.cs" />
+    <Compile Include="ViewModels\SharedViewModels\PagedResult.cs" />
     <Compile Include="ViewModels\CustomerViewModels\SaveCustomerFailedViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -306,6 +352,41 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201712052211472_Initial Migration.resx">
+      <DependentUpon>201712052211472_Initial Migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712052224378_Adding Customer and State objects..resx">
+      <DependentUpon>201712052224378_Adding Customer and State objects..cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712052253344_Added validation attributes to customer.resx">
+      <DependentUpon>201712052253344_Added validation attributes to customer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712052259487_More validation for customer.resx">
+      <DependentUpon>201712052259487_More validation for customer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712060028330_Seed States Table.resx">
+      <DependentUpon>201712060028330_Seed States Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712061921052_Seed more states.resx">
+      <DependentUpon>201712061921052_Seed more states.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712072121397_Fix the abbreviated names of Minnesota, Mississippi, Missouri, Montana.resx">
+      <DependentUpon>201712072121397_Fix the abbreviated names of Minnesota, Mississippi, Missouri, Montana.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712072139095_Fix issue of having multiple states with abbreviated name AK.resx">
+      <DependentUpon>201712072139095_Fix issue of having multiple states with abbreviated name AK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712072145105_Added District of Columbia.resx">
+      <DependentUpon>201712072145105_Added District of Columbia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712072155157_Removed range requirment for stateId.resx">
+      <DependentUpon>201712072155157_Removed range requirment for stateId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712121918443_Update validation for customer.resx">
+      <DependentUpon>201712121918443_Update validation for customer.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

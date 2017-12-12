@@ -29,5 +29,8 @@ namespace MedRideCMS.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<State> States { get; set; }
     }
 }

@@ -11,6 +11,14 @@
         </div>
     </div>
     <div class="row">
+
+        @{
+            if (!(Model.ErrorMessage == null))
+            {
+                <div class="alert alert-danger" role="alert">@Model.ErrorMessage</div>
+            }
+        }
+
         <div class="col-lg-2">
             <ul class="nav nav-pills nav-stacked">
                 <li role="presentation">
@@ -25,67 +33,68 @@
             </ul>
         </div>
         <div class="col-lg-10">
-            @using (Html.BeginForm("Save", "Customer", FormMethod.Post, new { @class = "form-horizontal text-right", autocomplete = "on" }))
+            @using (Html.BeginForm("Save", "Customer", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "on" }))
             {
                 <fieldset class="customer-form-fieldset">
                     <div class="container">
                         <div class="row">
                             <div class="form-group col-lg-5">
+                                @Html.ValidationMessageFor(m => m.Customer.FirstName)
                                 @Html.LabelFor(m => m.Customer.FirstName, new { @class = "col-lg-3" })
                                 @Html.TextBoxFor(m => m.Customer.FirstName, new { @class = "col-lg-8" })
-                                @Html.ValidationMessageFor(m => m.Customer.FirstName)
                             </div>
                             <div class="form-group col-lg-5">
+                                @Html.ValidationMessageFor(m => m.Customer.LastName)
                                 @Html.LabelFor(m => m.Customer.LastName, new { @class = "col-lg-3" })
                                 @Html.TextBoxFor(m => m.Customer.LastName, new { @class = "col-lg-8" })
-                                @Html.ValidationMessageFor(m => m.Customer.LastName)
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="form-group col-lg-5">
+                                @Html.ValidationMessageFor(m => m.Customer.Address)
                                 @Html.LabelFor(m => m.Customer.Address, new { @class = "col-lg-3" })
                                 @Html.TextBoxFor(m => m.Customer.Address, new { @class = "col-lg-8" })
-                                @Html.ValidationMessageFor(m => m.Customer.Address)
+                                
                             </div>
                             <div class="form-group col-lg-5">
+                                @Html.ValidationMessageFor(m => m.Customer.City)
                                 @Html.LabelFor(m => m.Customer.City, new { @class = "col-lg-3" })
                                 @Html.TextBoxFor(m => m.Customer.City, new { @class = "col-lg-8" })
-                                @Html.ValidationMessageFor(m => m.Customer.City)
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="form-group col-lg-5">
+                                @Html.ValidationMessageFor(m => m.Customer.StateId)
                                 @Html.LabelFor(m => m.Customer.StateId, new { @class = "col-lg-3" })
                                 <div class="col-lg-8 state-dropdown-container">
                                     @Html.DropDownListFor(m => m.Customer.StateId, new SelectList(Model.States, "Id", "Name"), "Select State", new { @class = "form-control temp input-sm" })
                                 </div>
-                                @Html.ValidationMessageFor(m => m.Customer.StateId)
                             </div>
                             <div class="form-group col-lg-5">
+                                @Html.ValidationMessageFor(m => m.Customer.Zip)
                                 @Html.LabelFor(m => m.Customer.Zip, new { @class = "col-lg-3" })
                                 @Html.TextBoxFor(m => m.Customer.Zip, new { @class = "col-lg-8" })
-                                @Html.ValidationMessageFor(m => m.Customer.Zip)
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-lg-5">
+                                @Html.ValidationMessageFor(m => m.Customer.Phone)
                                 @Html.LabelFor(m => m.Customer.Phone, new { @class = "col-lg-3" })
                                 @Html.TextBoxFor(m => m.Customer.Phone, new { @class = "col-lg-8" })
-                                @Html.ValidationMessageFor(m => m.Customer.Phone)
                             </div>
                             <div class="form-group col-lg-5">
+                                @Html.ValidationMessageFor(m => m.Customer.SecondaryPhone)
                                 @Html.LabelFor(m => m.Customer.SecondaryPhone, new { @class = "col-lg-3" })
                                 @Html.TextBoxFor(m => m.Customer.SecondaryPhone, new { @class = "col-lg-8" })
-                                @Html.ValidationMessageFor(m => m.Customer.SecondaryPhone)
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-lg-5">
+                                @Html.ValidationMessageFor(m => m.Customer.Email)
                                 @Html.LabelFor(m => m.Customer.Email, new { @class = "col-lg-3" })
                                 @Html.TextBoxFor(m => m.Customer.Email, new { @class = "col-lg-8" })
-                                @Html.ValidationMessageFor(m => m.Customer.Email)
                             </div>
                         </div>
 

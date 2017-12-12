@@ -11,5 +11,7 @@ namespace MedRideCMS.ViewModels.CustomerViewModels
         public Customer Customer { get; set; }
 
         public List<State> States { get; set; }
+
+        public string ErrorMessage { get; set; }
     }
 }

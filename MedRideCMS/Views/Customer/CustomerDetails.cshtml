@@ -79,20 +79,26 @@
         <div class="col-lg-3">
             <h4><strong>@Model.Customer.Email</strong></h4>
         </div>
+        <div class="col-lg-2">
+            <h4>Joined</h4>
+        </div>
+        <div class="col-lg-3">
+            <h4><strong>@Model.Customer.Created.ToShortDateString()</strong></h4>
+        </div>
     </div>
-
+    <div class="row">
+        <div class="col-lg-2">
+            <h4>Last Updated</h4>
+        </div>
+        <div class="col-lg-3">
+            <h4><strong>@(Model.Customer.Updated.ToShortDateString() + " " + Model.Customer.Updated.ToShortTimeString() )</strong></h4>
+        </div>
+    </div>
 </div>
 <div class="row">
     <div class="col-lg-5">
         <div class="btn-group btn-group-justified">
-            @if (!string.IsNullOrWhiteSpace(Model.ReturnUrl))
-            {
-                <a class="btn btn-primary" href="@Model.ReturnUrl">Back to Results</a>
-            }
-            else
-            {
-                @Html.ActionLink("Done", "Index", "Customer", null, new { @class = "btn btn-primary" });
-            }
+            <a class="btn btn-primary" href="@Model.ReturnUrl">Done</a>
 
             @Html.ActionLink("Edit", "EditCustomer", new { id = Model.Customer.Id, returnUrl = Model.ReturnUrl }, new { @class = "btn btn-primary" })
 

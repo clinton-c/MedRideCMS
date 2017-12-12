@@ -1,21 +1,29 @@
-﻿@model MedRideCMS.ViewModels.CustomerViewModels.CustomerPagedResultViewModel
+﻿@model MedRideCMS.ViewModels.CustomerViewModels.CustomerTableViewModel
 @using MedRideCMS.Models
 
 @{ 
-    var firstNameSortToggle = base.Model.SortByType == CustomerSortType.FirstName_Ascending
-        ? CustomerSortType.FirstName_Descending
-        : (base.Model.SortByType == CustomerSortType.FirstName_Descending ? CustomerSortType.Default : CustomerSortType.FirstName_Ascending);
+    var pagedResult = Model.PagedResult;
 
-    var lastNameSortToggle = base.Model.SortByType == CustomerSortType.LastName_Ascending
-        ? CustomerSortType.LastName_Descending
-        : (base.Model.SortByType == CustomerSortType.LastName_Descending ? CustomerSortType.Default : CustomerSortType.LastName_Ascending);
+    var firstNameSortToggle = base.Model.SortByType == CustomerSortType.FIRSTNAME_ASCENDING
+        ? CustomerSortType.FIRSTNAME_DESCENDING
+        : (base.Model.SortByType == CustomerSortType.FIRSTNAME_DESCENDING ? CustomerSortType.DEFAULT : CustomerSortType.FIRSTNAME_ASCENDING);
 
-    var stateSortToggle = base.Model.SortByType == CustomerSortType.State_Ascending
-        ? CustomerSortType.State_Descending
-        : (base.Model.SortByType == CustomerSortType.State_Descending ? CustomerSortType.Default : CustomerSortType.State_Ascending);
+    var lastNameSortToggle = base.Model.SortByType == CustomerSortType.LASTNAME_ASCENDING
+        ? CustomerSortType.LASTNAME_DESCENDING
+        : (base.Model.SortByType == CustomerSortType.LASTNAME_DESCENDING ? CustomerSortType.DEFAULT : CustomerSortType.LASTNAME_ASCENDING);
+
+    var stateSortToggle = base.Model.SortByType == CustomerSortType.STATE_ASCENDING
+        ? CustomerSortType.STATE_DESCENDING
+        : (base.Model.SortByType == CustomerSortType.STATE_DESCENDING ? CustomerSortType.DEFAULT : CustomerSortType.STATE_ASCENDING);
+
+    var updatedSortToggle = base.Model.SortByType == CustomerSortType.UPDATED_ASCENDING 
+        ? CustomerSortType.UPDATED_DESCENDING : CustomerSortType.UPDATED_ASCENDING;
+
+    var createdSortToggle = base.Model.SortByType == CustomerSortType.CREATED_ASCENDING
+       ? CustomerSortType.CREATED_DESCENDING : CustomerSortType.CREATED_ASCENDING;
 
 
-    var returnUrl = Model.ReturnUrl.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", Model.Page }, { "SortBy", Model.SortByType }, { "PageSize", Model.PageSize } });
+    var returnUrl = Model.ReturnUrl.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", pagedResult.Page }, { "SortBy", Model.SortByType }, { "PageSize", pagedResult.PageSize } });
 
 
 }
@@ -27,54 +35,80 @@
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
-                <th>
-                    <a href="@Url.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", Model.Page }, { "SortBy", firstNameSortToggle }, { "PageSize", Model.PageSize } })">
+                <th class="@(Model.HideFirstNameCol ? "hidden" : "")">
+                    <a href="@Url.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", pagedResult.Page }, { "SortBy", firstNameSortToggle }, { "PageSize", pagedResult.PageSize } })">
                         First Name
-                        <span class="glyphicon glyphicon-arrow-down @(base.Model.SortByType== CustomerSortType.FirstName_Descending ? "" : "hidden" )" aria-hidden="true"></span>
-                        <span class="glyphicon glyphicon-arrow-up @(base.Model.SortByType== CustomerSortType.FirstName_Ascending ? "" : "hidden" )" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-arrow-down @(base.Model.SortByType == CustomerSortType.FIRSTNAME_DESCENDING ? string.Empty : "hidden" )" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-arrow-up @(base.Model.SortByType == CustomerSortType.FIRSTNAME_ASCENDING ? string.Empty : "hidden" )" aria-hidden="true"></span>
                     </a> 
                 </th>
-                <th>
-                    <a href="@Url.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", Model.Page }, { "SortBy", lastNameSortToggle }, { "PageSize", Model.PageSize } })">
+                <th class="@(Model.HideLastNameCol ? "hidden" : "")">
+                    <a href="@Url.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", pagedResult.Page }, { "SortBy", lastNameSortToggle }, { "PageSize", pagedResult.PageSize } })">
                         Last Name
-                        <span class="glyphicon glyphicon-arrow-down @(base.Model.SortByType== CustomerSortType.LastName_Descending ? "" : "hidden" )" aria-hidden="true"></span>
-                        <span class="glyphicon glyphicon-arrow-up @(base.Model.SortByType== CustomerSortType.LastName_Ascending ? "" : "hidden" )" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-arrow-down @(base.Model.SortByType == CustomerSortType.LASTNAME_DESCENDING ? string.Empty : "hidden" )" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-arrow-up @(base.Model.SortByType == CustomerSortType.LASTNAME_ASCENDING ? string.Empty : "hidden" )" aria-hidden="true"></span>
                     </a>
                 </th>
 
-                <th>Address</th>
-                <th>City</th>
-                <th>
-                    <a href="@Url.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", Model.Page }, { "SortBy", stateSortToggle }, { "PageSize", Model.PageSize } })">
+                <th class="@(Model.HideAddressCol ? "hidden" : "")">Address</th>
+                <th class="@(Model.HideCityCol ? "hidden" : string.Empty)">City</th>
+                <th class="@(Model.HideStateCol ? "hidden" : string.Empty)">
+                    <a href="@Url.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", pagedResult.Page }, { "SortBy", stateSortToggle }, { "PageSize", pagedResult.PageSize } })">
                         State
-                        <span class="glyphicon glyphicon-arrow-down @(base.Model.SortByType== CustomerSortType.State_Descending ? "" : "hidden" )" aria-hidden="true"></span>
-                        <span class="glyphicon glyphicon-arrow-up @(base.Model.SortByType== CustomerSortType.State_Ascending ? "" : "hidden" )" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-arrow-down @(base.Model.SortByType == CustomerSortType.STATE_DESCENDING ? string.Empty : "hidden" )" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-arrow-up @(base.Model.SortByType == CustomerSortType.STATE_ASCENDING ? string.Empty : "hidden" )" aria-hidden="true"></span>
                     </a>
-
                 </th>
 
-                <th>Zip</th>
-                <th>Phone</th>
+                <th class="@(Model.HideZipCol ? "hidden" : string.Empty)">Zip</th>
+                <th class="@(Model.HidePrimaryPhoneCol ? "hidden" : string.Empty)">Phone</th>
+                <th class="@(Model.HideSecondaryPhoneCol ? "hidden" : string.Empty)">Secondary Phone</th>
+                <th class="@(Model.HideEmailCol ? "hidden" : string.Empty)">Email</th>
+                <th class="@(Model.HideUpdatedCol ? "hidden" : string.Empty)">
+                    <a href="@Url.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", pagedResult.Page }, { "SortBy", updatedSortToggle }, { "PageSize", pagedResult.PageSize } })">
+                        Recently Updated
+                        <span class="glyphicon glyphicon-arrow-down @(base.Model.SortByType == CustomerSortType.UPDATED_DESCENDING ? string.Empty : "hidden" )" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-arrow-up @(base.Model.SortByType == CustomerSortType.UPDATED_ASCENDING ? string.Empty : "hidden" )" aria-hidden="true"></span>
+                    </a> 
+                </th>
+                <th class="@(Model.HideCreatedCol ? "hidden" : string.Empty)">
+                    <a href="@Url.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", pagedResult.Page }, { "SortBy", createdSortToggle }, { "PageSize", pagedResult.PageSize } })">
+                        Added
+                        <span class="glyphicon glyphicon-arrow-down @(base.Model.SortByType == CustomerSortType.CREATED_DESCENDING ? string.Empty : "hidden" )" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-arrow-up @(base.Model.SortByType == CustomerSortType.CREATED_ASCENDING ? string.Empty : "hidden" )" aria-hidden="true"></span>
+                    </a> 
+                </th>
                 <th>Action</th>
             </tr>
         </thead>
 
-        @foreach (var customer in Model.PageItems)
+        @foreach (var customer in pagedResult.Items)
         {
             <tr>
-                <td>@customer.FirstName</td>
-                <td>@customer.LastName</td>
-                <td>@customer.Address</td>
-                <td>@customer.City</td>
-                <td>@Model.States.SingleOrDefault(s => s.Id == customer.StateId).AbbreviatedName</td>
-                <td>@customer.Zip</td>
-                <td>@customer.Phone</td>
-                <td>
-                    @Html.ActionLink("Details", "CustomerDetails", new { id = customer.Id, returnUrl = returnUrl })
-                    <span>|</span>
-                    @Html.ActionLink("Edit", "EditCustomer", new { id = customer.Id, returnUrl = returnUrl })
-                    <span>|</span>
-                    @Html.ActionLink("New Appointment", "EditCustomer", new { id = customer.Id })
+                <td class="@(Model.HideFirstNameCol ? "hidden" : string.Empty)">@customer.FirstName</td>
+                <td class="@(Model.HideLastNameCol ? "hidden" : string.Empty)">@customer.LastName</td>
+                <td class="@(Model.HideAddressCol ? "hidden" : string.Empty)">@customer.Address</td>
+                <td class="@(Model.HideCityCol ? "hidden" : string.Empty)">@customer.City</td>
+                <td class="@(Model.HideStateCol ? "hidden" : string.Empty)">@Model.States.SingleOrDefault(s => s.Id == customer.StateId).AbbreviatedName</td>
+                <td class="@(Model.HideZipCol ? "hidden" : string.Empty)">@customer.Zip</td>
+                <td class="@(Model.HidePrimaryPhoneCol ? "hidden" : string.Empty)">@customer.Phone</td>
+                <td class="@(Model.HideSecondaryPhoneCol ? "hidden" : string.Empty)">@customer.SecondaryPhone</td>
+                <td class="@(Model.HideEmailCol ? "hidden" : string.Empty)">@customer.Email</td>
+                <td class="@(Model.HideUpdatedCol ? "hidden" : string.Empty)">@(customer.Updated.ToShortDateString() + " " + customer.Updated.ToShortTimeString())</td>
+                <td class="@(Model.HideCreatedCol ? "hidden" : string.Empty)">@customer.Created</td>
+                <td class="nowrap">
+
+                    <a href="@Url.Action("CustomerDetails", "Customer", new { id = customer.Id, returnUrl = returnUrl })" class="btn btn-primary btn-xs">
+                        <span class="glyphicon glyphicon-th-list"></span>
+                    </a>
+
+                    <a href="@Url.Action("EditCustomer", "Customer", new { id = customer.Id, returnUrl = returnUrl })" class="btn btn-primary btn-xs">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+
+                    <a href="@Url.Action("Details", "Customer", new { id = customer.Id, returnUrl = returnUrl })" class="btn btn-primary btn-xs">
+                        <span class="glyphicon glyphicon-plus-sign"></span>
+                    </a>
                 </td>
             </tr>
         }

@@ -4,29 +4,89 @@
 @{
     ViewBag.Title = "Customers";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Model.Page = Model.TableViewModel.PagedResult.Page;
+    Model.PageSize = Model.TableViewModel.PagedResult.PageSize;
+    Model.SortBy = Model.TableViewModel.SortByType;
+
+
+    bool viewAllIsChecked = true,
+        recentIsChecked = false,
+        newCustomerIsChecked = false;
+
+
+    if(Model.SortBy == CustomerSortType.CREATED_DESCENDING || Model.SortBy == CustomerSortType.CREATED_ASCENDING)
+    {
+        newCustomerIsChecked = true;
+        viewAllIsChecked = false;
+    }
+    else if(Model.SortBy == CustomerSortType.UPDATED_DESCENDING || Model.SortBy == CustomerSortType.UPDATED_ASCENDING)
+    {
+        recentIsChecked = true;
+        viewAllIsChecked = false;
+    }
+
 }
 
-<h2>Customer Dashboard</h2>
-<div class="col-lg-2">
-    <ul class="nav nav-pills nav-stacked">
-        <li role="presentation" class="active">
-            @Html.ActionLink("Home", "Index")
-        </li>
-        <li role="presentation">
-            @Html.ActionLink("Customer Lookup", "CustomerLookup")
-        </li>
-        <li role="presentation">
-            @Html.ActionLink("New Customer", "NewCustomer")
-        </li>
-    </ul>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-10">
-           
-            @{ Html.RenderPartial("CustomerTable", Model.PagedResult); }
 
-            @{ Html.RenderPartial("PagedResultNavigationButtons", Model.PagedResult); }
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-2">
+            <h2>Customer Dashboard</h2>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-lg-2">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation" class="active">
+                    @Html.ActionLink("Home", "Index")
+                </li>
+                <li role="presentation">
+                    @Html.ActionLink("Customer Lookup", "CustomerLookup")
+                </li>
+                <li role="presentation">
+                    @Html.ActionLink("New Customer", "NewCustomer")
+                </li>
+            </ul>
+                    
+
+
+            @using (Html.BeginForm("Index", "Customer", FormMethod.Get, new { id = "select-view-panel" }))
+            {
+                <fieldset class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.SortBy, "View All")
+                            @Html.RadioButtonFor(m => m.SortBy, CustomerSortType.DEFAULT, viewAllIsChecked ? new { @checked="checked" } : null)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.SortBy, "Recent")
+                            @Html.RadioButtonFor(m => m.SortBy, CustomerSortType.UPDATED_DESCENDING, recentIsChecked ? new { @checked = "checked" } : null)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.SortBy, "New Customers")
+                            @Html.RadioButtonFor(m => m.SortBy, CustomerSortType.CREATED_DESCENDING, newCustomerIsChecked ? new { @checked = "checked" } : null)
+                        </div>
+                        <div class="form-group">
+                            @Html.HiddenFor(m => m.Page)
+                            @Html.HiddenFor(m => m.PageSize)
+                            <button type="submit" class="btn btn-default btn-sm pull-right">Select</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+            }
+        </div>
+
+        <div class="col-lg-10">
+            @{ Html.RenderPartial("CustomerTable", Model.TableViewModel); }
+
+            @{ Html.RenderPartial("PagedResultNavigationButtons", Model.TableViewModel); }
         </div>
 
     </div>

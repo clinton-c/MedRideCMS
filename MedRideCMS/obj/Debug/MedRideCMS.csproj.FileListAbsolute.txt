@@ -15,6 +15,7 @@ C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\bin\MedRideCMS.
 C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\bin\MedRideCMS.dll
 C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\bin\MedRideCMS.pdb
 C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\bin\Antlr3.Runtime.dll
+C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\bin\AutoMapper.dll
 C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\bin\EntityFramework.dll
 C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\bin\EntityFramework.SqlServer.dll
 C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\bin\Microsoft.AI.Agent.Intercept.dll
@@ -48,6 +49,7 @@ C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\bin\System.Web.
 C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\bin\System.Web.WebPages.dll
 C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\bin\System.Web.WebPages.Razor.dll
 C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\bin\WebGrease.dll
+C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\bin\AutoMapper.xml
 C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\bin\Microsoft.AI.DependencyCollector.xml
 C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\bin\Microsoft.AI.Web.xml
@@ -80,5 +82,15 @@ C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\bin\Microsoft.O
 C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\obj\Debug\MedRideCMS.csprojResolveAssemblyReference.cache
 C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\obj\Debug\MedRideCMS.dll
 C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\obj\Debug\MedRideCMS.pdb
-C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\bin\AutoMapper.dll
-C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\bin\AutoMapper.xml
+C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\obj\Debug\MedRideCMS.Migrations.InitialMigration.resources
+C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\obj\Debug\MedRideCMS.csproj.GenerateResource.Cache
+C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\obj\Debug\MedRideCMS.Migrations.AddingCustomerandStateobjects.resources
+C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\obj\Debug\MedRideCMS.Migrations.Addedvalidationattributestocustomer.resources
+C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\obj\Debug\MedRideCMS.Migrations.Morevalidationforcustomer.resources
+C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\obj\Debug\MedRideCMS.Migrations.SeedStatesTable.resources
+C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\obj\Debug\MedRideCMS.Migrations.Seedmorestates.resources
+C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\obj\Debug\MedRideCMS.Migrations.FixtheabbreviatednamesofMinnesotaMississippiMissouriMontana.resources
+C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\obj\Debug\MedRideCMS.Migrations.FixissueofhavingmultiplestateswithabbreviatednameAK.resources
+C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\obj\Debug\MedRideCMS.Migrations.AddedDistrictofColumbia.resources
+C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\obj\Debug\MedRideCMS.Migrations.RemovedrangerequirmentforstateId.resources
+C:\Users\clint_000\Documents\MedRide4U CMS\MedRideCMS\MedRideCMS\obj\Debug\MedRideCMS.Migrations.Updatevalidationforcustomer.resources

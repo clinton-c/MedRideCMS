@@ -11,13 +11,13 @@
 
     <h2>Search Results <small>@Html.ActionLink("(Back to Search)", "CustomerLookup", "Customer", null, new { @class = "btn btn-link" })</small></h2>
     <h4>
-        Found @Model.PagedResult.TotalNumItems matches for: <em>"@(Model.SearchParams.ToString())"</em>
+        Found @Model.TableViewModel.PagedResult.TotalNumItems matches for: <em>"@(Model.SearchParams.ToString())"</em>
     </h4>
 
 
-    @{ Html.RenderPartial("CustomerTable", Model.PagedResult); }
+    @{ Html.RenderPartial("CustomerTable", Model.TableViewModel); }
     
-    @{ Html.RenderPartial("PagedResultNavigationButtons", Model.PagedResult); }
+    @{ Html.RenderPartial("PagedResultNavigationButtons", Model.TableViewModel); }
    
 </div>
 

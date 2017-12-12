@@ -10,7 +10,7 @@ namespace MedRideCMS.ViewModels.CustomerViewModels
     public class CustomerLookupResultViewModel
     {
         public CustomerSearchParamsDto SearchParams { get; set; }
-        public CustomerPagedResultViewModel PagedResult { get; set; }
+        public CustomerTableViewModel TableViewModel { get; set; }
 
     }
 }

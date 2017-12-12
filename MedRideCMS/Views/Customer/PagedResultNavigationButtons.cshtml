@@ -1,29 +1,31 @@
-﻿@model MedRideCMS.ViewModels.CustomerViewModels.CustomerPagedResultViewModel
+﻿@model MedRideCMS.ViewModels.CustomerViewModels.CustomerTableViewModel
 @using MedRideCMS.Models
 
 @{ 
-    var pageNavList = Model.GetPageNavigationList(5);
+    var pagedResult = Model.PagedResult;
+
+    var pageNavList = pagedResult.GetPageNavigationList(5);
 }
 
 <nav aria-label="Search Result Page Navigator">
-    <h5>Showing Page @(Model.Page + 1) of @Model.TotalNumPages</h5>
+    <h5>Showing Page @(pagedResult.Page + 1) of @pagedResult.TotalNumPages</h5>
     <ul id="page-nav-list" class="pagination">
         <li>
 
-            <a href="@Url.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", Model.FirstPage }, { "SortBy", Model.SortByType } })" aria-label="first-page">
-                <span aria-hidden="@(Model.IsFirstPage ? "true" : "false")">&laquo;</span>
+            <a href="@Url.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", pagedResult.FirstPage }, { "SortBy", Model.SortByType } })" aria-label="first-page">
+                <span aria-hidden="@(pagedResult.IsFirstPage ? "true" : "false")">&laquo;</span>
             </a>
         </li>
         <li>
-            <a href="@Url.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", Model.PreviousPage }, { "SortBy", Model.SortByType } })" aria-label="Previous">
-                <span aria-hidden="@(Model.IsFirstPage ? "true" : "false")">&lsaquo;</span>
+            <a href="@Url.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", pagedResult.PreviousPage }, { "SortBy", Model.SortByType } })" aria-label="Previous">
+                <span aria-hidden="@(pagedResult.IsFirstPage ? "true" : "false")">&lsaquo;</span>
             </a>
         </li>
 
 
         @{for (var i = 0; i < pageNavList.Length; i++)
             {
-                var isCurrPage = pageNavList[i] == Model.Page ? true : false;
+                var isCurrPage = pageNavList[i] == pagedResult.Page ? true : false;
 
                 <li class="@(isCurrPage ? "active" : "")">
                     <a id="@(isCurrPage ? "current-page" : "")" href="@Url.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", pageNavList[i] }, { "SortBy", Model.SortByType } })">
@@ -37,13 +39,13 @@
 
 
         <li>
-            <a href="@Url.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", Model.Page < Model.TotalNumPages - 1 ? Model.Page + 1 : Model.Page }, { "SortBy", Model.SortByType } })" aria-label="Next">
-                <span aria-hidden="@(Model.PageItems.Count() <= Model.PageSize || Model.Page == Model.TotalNumPages ? "true" : "false")">&rsaquo;</span>
+            <a href="@Url.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", pagedResult.Page < pagedResult.TotalNumPages - 1 ? pagedResult.Page + 1 : pagedResult.Page }, { "SortBy", Model.SortByType } })" aria-label="Next">
+                <span aria-hidden="@(pagedResult.Items.Count() <= pagedResult.PageSize || pagedResult.Page == pagedResult.TotalNumPages ? "true" : "false")">&rsaquo;</span>
             </a>
         </li>
         <li>
-            <a href="@Url.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", Model.TotalNumPages - 1 }, { "SortBy", Model.SortByType } })" aria-label="last-page">
-                <span aria-hidden="@(Model.PageItems.Count() <= Model.PageSize || Model.Page == Model.TotalNumPages ? "true" : "false")">&raquo;</span>
+            <a href="@Url.RouteUrl(new RouteValueDictionary(Model.ReturnRouteValues) { { "Page", pagedResult.TotalNumPages - 1 }, { "SortBy", Model.SortByType } })" aria-label="last-page">
+                <span aria-hidden="@(pagedResult.Items.Count() <= pagedResult.PageSize || pagedResult.Page == pagedResult.TotalNumPages ? "true" : "false")">&raquo;</span>
             </a>
         </li>
     </ul>
